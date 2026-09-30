@@ -3,6 +3,8 @@ Player player;
 int score;
 boolean gameOver;
 
+int gameW = 6000, gameH = 6000;
+
 void setup() {
 	size(600, 600);
 	frameRate(60);
@@ -21,6 +23,13 @@ void resetGame() {
 
 void draw() {
 	background(255);
+
+	float cameraX = width / 2 - player.getX();
+	float cameraY = height / 2 - player.getY();
+
+	pushMatrix();
+	translate(cameraX, cameraY);
+
 	Ball biggest = largest(b);
 	for (int i = 0; i < b.length; i++) {
 		b[i].setColor(b[i] == biggest ? color(255, 145, 20) : color(240, 45, 45));
@@ -29,7 +38,7 @@ void draw() {
 	}
 
 	if (!gameOver) {
-		player.move();
+		player.move(cameraX, cameraY);
 		for (int i = 0; i < b.length; i++) {
 			if (player.touches(b[i])) {
 				if (player.getRadius() > b[i].getRadius() * 1.1) {
@@ -45,6 +54,8 @@ void draw() {
 	}
 
 	player.display();
+
+	popMatrix();
 
 	noStroke();
 	fill(0);
