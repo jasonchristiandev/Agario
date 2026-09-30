@@ -2,6 +2,8 @@ Ball[] b;
 Player player;
 int score;
 boolean gameOver;
+float zoom = 1;
+float maxPlayerSpeed = 10;
 
 int gameW = 6000, gameH = 6000;
 
@@ -12,13 +14,14 @@ void setup() {
 }
 
 void resetGame() {
-	b = new Ball[35];
+	b = new Ball[1024];
 	for (int i = 0; i < b.length; i++) {
 		b[i] = new Ball(color(240, 45, 45));
 	}
 	player = new Player();
 	score = 0;
 	gameOver = false;
+	zoom = 1;
 }
 
 void draw() {
@@ -26,9 +29,13 @@ void draw() {
 
 	float cameraX = width / 2 - player.getX();
 	float cameraY = height / 2 - player.getY();
+	float cameraZoom = 24.0 / player.getRadius();
+	zoom = lerp(zoom, cameraZoom * 2, 0.1);
 
 	pushMatrix();
-	translate(cameraX, cameraY);
+	translate(cameraX + player.getX(), cameraY + player.getY());
+	scale(zoom);
+	translate(-player.getX(), -player.getY());
 
 	Ball biggest = largest(b);
 	for (int i = 0; i < b.length; i++) {

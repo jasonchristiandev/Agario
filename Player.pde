@@ -1,6 +1,6 @@
 public class Player extends Sprite {
 	public Player() {
-		super();
+		this(gameW / 2, gameH / 2, 24, color(25, 65, 230));
 	}
 
 	public Player(float x, float y, float r, color c) {
@@ -21,10 +21,14 @@ public class Player extends Sprite {
 		float worldMouseX = mouseX - cameraX;
 		float worldMouseY = mouseY - cameraY;
 
-		float x = getX() + (worldMouseX - getX()) * 0.08;
+		float velX = (worldMouseX - getX()) * 0.08;
+        float velY = (worldMouseY - getY()) * 0.08;
+        float speed = sqrt(velX * velX + velY * velY);
+        float cspeed = constrain(speed, 0, maxPlayerSpeed);
+        if (speed < 0.01) return;
+        float x = getX() + velX / speed * cspeed;
+        float y = getY() + velY / speed * cspeed;
 		x = constrain(x, r, gameW - r);
-
-		float y = getY() + (worldMouseY - getY()) * 0.08;
 		y = constrain(y, r, gameH - r);
 
 		setPosition(x, y);

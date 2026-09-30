@@ -2,8 +2,8 @@ public class Ball extends Sprite {
 	private float vx, vy;
 
 	public Ball(color c) {
-		this((float)(Math.random() * 534 + 33),
-			 (float)(Math.random() * 534 + 33),
+		this((float)(Math.random() * (gameW - 66) + 33),
+			 (float)(Math.random() * (gameH - 66) + 33),
 			 (float)(Math.random() * 28 + 5),
 			 (float)(Math.random() * 2 - 1),
 			 (float)(Math.random() * 2 - 1), c);
