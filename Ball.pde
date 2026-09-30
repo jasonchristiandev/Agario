@@ -19,13 +19,13 @@ public class Ball extends Sprite {
 		float x = getX() + vx;
 		float y = getY() + vy;
 		float r = getRadius();
-		if (x - r < 0 || x + r > width) {
+		if (x - r < 0 || x + r > gameW) {
 			vx *= -1;
-			x = constrain(x, r, width - r);
+			x = constrain(x, r, gameW - r);
 		}
-		if (y - r < 0 || y + r > height) {
+		if (y - r < 0 || y + r > gameH) {
 			vy *= -1;
-			y = constrain(y, r, height - r);
+			y = constrain(y, r, gameH - r);
 		}
 		setPosition(x, y);
 	}

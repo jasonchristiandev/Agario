@@ -15,12 +15,18 @@ public class Player extends Sprite {
 		circle(getX(), getY(), 5);
 	}
 
-	public void move() {
+	public void move(float cameraX, float cameraY) {
 		float r = getRadius();
-		float x = getX() + (mouseX - getX()) * 0.08;
-		x = constrain(x, r, width - r);
-		float y = getY() + (mouseY - getY()) * 0.08;
-		y = constrain(y, r, height - r);
+
+		float worldMouseX = mouseX - cameraX;
+		float worldMouseY = mouseY - cameraY;
+
+		float x = getX() + (worldMouseX - getX()) * 0.08;
+		x = constrain(x, r, gameW - r);
+
+		float y = getY() + (worldMouseY - getY()) * 0.08;
+		y = constrain(y, r, gameH - r);
+
 		setPosition(x, y);
 	}
 
