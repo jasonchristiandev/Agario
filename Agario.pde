@@ -6,6 +6,7 @@ float zoom = 1;
 float maxPlayerSpeed = 10;
 
 int gameW = 6000, gameH = 6000;
+int borderSize = 1000;
 
 void setup() {
 	size(600, 600);
@@ -61,6 +62,16 @@ void draw() {
 	}
 
 	player.display();
+
+	fill(255, 230, 230);
+	rect(-borderSize, -borderSize, gameW + borderSize * 2, borderSize);
+    rect(-borderSize, gameH, gameW + borderSize * 2, borderSize);
+    rect(-borderSize, -borderSize, borderSize, gameH + borderSize * 2);
+    rect(gameW, -borderSize, borderSize, gameH + borderSize * 2);
+    noFill();
+    stroke(255, 0, 0);
+    strokeWeight(8);
+	rect(0, 0, gameW, gameH);
 
 	popMatrix();
 
